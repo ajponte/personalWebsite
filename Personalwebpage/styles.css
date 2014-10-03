@@ -1,0 +1,92 @@
+	
+	body {
+    	text-align: center;
+    	background:url("images/campinille.jpg");
+    	float: left;
+    	background-size: cover;
+    	background-position: center center;
+    	background-repeat: no-repeat;
+    	background-attachment: fixed;
+    	color: white;
+    	font-family: Helvetica, arial, sans-serif;
+	}
+	
+	.container {
+		padding-top: 10px;
+		padding-left: 10px;
+
+	}
+
+	/*Styles for tabs.*/
+	#header ul {
+		list-style: none;
+		padding:0;
+		margin:0;
+	}
+	
+	#header li {
+		float: left;
+		border: 2px solid;
+		border-bottom-width: 1;
+		margin: 0 0.3em 0 0;
+	}
+	
+	#header li a {
+		padding: 0 1em;
+		text-decoration: none;
+
+	}
+	
+	#content {
+		border: 1px solid;
+	}
+	
+	#header #selected {
+		padding-bottom: 1px; 
+		background: white;
+	}
+	#content {
+		border: 1px solid;
+		clear: both;
+	}
+
+	h1 {
+		margin: 0;
+		padding: 0 0 1em 0;
+		color: black;
+		text-align: center;
+	}
+
+	#header #selected {
+		position: relative;
+		top: 1px;
+		background: white;
+	}
+
+	#about {
+		height:200px;
+		width:600px;
+		border:1px solid #ccc;
+		font:16px/26px Georgia, Garamond, Serif;
+		overflow:auto; 
+		background:grey;
+	}
+
+	#about > p {
+		float: left;
+		font-size: 20px;
+	}
+
+	#footer {
+		clear: both;
+		padding-bottom: 100px;
+		color: white;
+		text-align: right;
+	}
+	#ocfImg {
+		width: 90px;
+		height: 39px;
+		border: 1px;
+		float: right;
+		padding-left: 20px;
+	}

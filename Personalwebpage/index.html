@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <title> Alan's Webpage </title>
+        <link rel="icon" href="images/faviconTrnsBkgd.ico">
+        <!-- Bootstrap CSS files -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" type="text/css">
+        <link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
+        <style>
+            body {
+                    margin: 0;
+                    background: url("images/campinille.jpg");
+                    background-size: Cover;
+                    background-repeat:no-repeat;
+            }
+
+            .myBackground {
+                background-color: rgba(176,176,176, 0.5);
+                color: inherit;
+            }
+
+            .boxRounder {
+                -webkit-border-radius: 15px;
+                -moz-border-radius: 15px;
+                border-radius: 15px;
+            }
+            
+            .eventRounder {
+                -webkit-border-top-left-radius: 15px;
+                -webkit-border-top-right-radius: 15px; 
+                -moz-border-top-right-radius: 15px;
+                -moz-border-top-left-radius: 15px;
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+
+            #footer {
+                clear: both;
+                padding: 10px;
+                color: white;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+
+    <!-- Top level container from bootstrap -->
+    <div class="container">
+
+        <!-- outermost row to control page width -->
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-8 myBackground"> 
+            <!-- Create an "inverse" (dark) navigation bar. -->
+                <div class="row">
+                <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+         
+
+                            
+
+
+                            <a class="navbar-brand navbar-right"  data-toggle="modal" data-target="#myModal"> 
+
+                                <h3>Alan Ponte<h3>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    <nav class="navbar navbar-default" role="navigation">
+                      <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+                          <a class="navbar-brand" href="Resume_8_12_14--AlanPonte.pdf" target = "_blank">Resume</a>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                          <ul class="nav navbar-nav">
+                            <li><a href="https://github.com/ajponte" target = "_blank">Github</a></li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <span class="caret"></span></a>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="aboutSumpha.html" target = "_blank">Sumpha Event Randomizer</a></li>
+                                <li><a href="NFLPlayerSentiments/website/about.html" target = "_blank">NFL Sentiments</a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                          <ul class="nav navbar-nav navbar-right">
+                            <li><a href="links.html" target = "_blank">Some Interesting Links</a></li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Get in Touch <span class="caret"></span></a>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="https://www.linkedin.com/pub/alan-ponte/1b/b58/308" target = "_blank">Linkedin</a></li>
+                                <li><a href="https://plus.google.com/u/1/100187483843915781218/posts" target = "_blank">Google+</a></li>
+                                <li><a href="http://alanjponte.blogspot.com/" target = "_blank">Blog</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Email Me: <br /> alanjponte AT gmail Dot com</a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </div><!-- /.navbar-collapse -->
+                      </div><!-- /.container-fluid -->
+                    </nav>
+                    <div class="row">
+                        <div class="jumbotron col-md-12"> 
+                            <h3>Hello, and welcome to my webpage.</h3>
+                            <p>I am a recent graduate of <a href="http://www.berkeley.edu/index.html" target = "_blank">U.C. Berkeley</a> with a degree in  <a href="http://math.berkeley.edu/" target = "_blank">Applied Mathematics.</a></p>
+                            <p>  I am currently working as a Computer Systems Engineer at <a href="http://www.lbl.gov/" target = "_blank">Lawrence Berkeely National Laboratory</a> </p>
+
+                        </div>
+                    </div>
+                    
+                   
+
+                </div>
+            </div>
+                <div id="footer">
+                    &copy; copywrite Alan Ponte 2014   
+                </div>
+        </div>
+        <!-- Include JQuery for Bootstrap's JavaScript plugins. -->
+        <!-- THIS MUST BE FIRST BEFORE THE BOOTSTRAP JS FILE -->
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <!-- Include Bootstrap JavaScript plugins. -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
