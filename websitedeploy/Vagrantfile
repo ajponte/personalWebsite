@@ -1,0 +1,100 @@
+nodes = [
+  {
+    :hostname => 'alanjponte',
+    :boxname => 'alanjponte',
+    :aliases => %w(aci-vagrant-core.locationlabs.com aci-vagrant-core.vagrant.wavemarket.com),
+    :ip => '172.16.90.11',
+    :box => 'bento/ubuntu-12.04',
+    :ram => '2048',
+    :cpus => 2,
+    :synced_folders => [
+      {
+         :host => "/var/tmp/#{ENV['USER']}/build/",
+         :guest => "/var/tmp/#{ENV['USER']}/build/",
+         :create => true,
+      },
+    ],
+    :forwarded_ports => [
+      {
+         :guest => 443,
+         :host => 9443
+      },
+    ],
+  },
+]
+
+# Vagrantfile API/syntax version. Don’t touch unless you know what you’re doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  if Gem::Version.new(Vagrant::VERSION) >= Gem::Version.new("1.6")
+    config.ssh.insert_key = false
+  end
+
+  if Vagrant.has_plugin?('vagrant-hostmanager')
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+  else
+    raise "** Install vagrant-hostmanager plugin `vagrant plugin install vagrant-hostmanager`.**\n"
+  end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :machine
+    config.cache.enable :apt
+  else
+    raise "** Install vagrant-cachier plugin (vagrant plugin install vagrant-cachier) to speedup deploy.**\n"
+  end
+
+  nodes.each do |node|
+    config.vm.define node[:boxname] do |node_config|
+      node_config.vm.box = node[:box]
+      node_config.vm.hostname = node[:hostname]
+      node_config.vm.network :private_network, ip: node[:ip]
+
+      if node.has_key?(:forwarded_ports)
+        node[:forwarded_ports].each do |forwarded_port|
+          node_config.vm.network :forwarded_port, guest: forwarded_port[:guest], host: forwarded_port[:host]
+        end
+      end
+
+      if node.has_key?(:aliases)
+        node_config.hostmanager.aliases = node[:aliases]
+      end
+
+      if node.has_key?(:synced_folders)
+        node[:synced_folders].each do |synced_folder|
+           node_config.vm.synced_folder synced_folder[:host], synced_folder[:guest], create: synced_folder[:create] || false
+        end
+      end
+
+      node_config.vm.provider :virtualbox do |vb|
+        vb.memory = node[:ram]
+        vb.cpus = node[:cpus]
+        # Turn off HostIOCache on the SATA Controller, this was causing issue
+        # with large I/O read/write operations (e.g. apt-get) and causing the
+        # drive to be corrupted.
+        vb.customize ["storagectl",:id,"--name","SATA Controller","--hostiocache","off"]
+        vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        vb.customize ['guestproperty', 'set', :id, '/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold', 10000]
+      end
+
+      # inline causes stdin error, this is expected and harmless
+      node_config.vm.provision "shell", inline: $provision_shell_script
+    end
+  end
+end
+
+
+$provision_shell_script = <<SCRIPT
+apt-get -qy update
+
+# add nagios user and add public key to authorized_keys
+# needed by some of our nagios checks
+adduser nagios
+mkdir -p /home/nagios/.ssh
+echo “ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCpMx+eeDY1E21ZnyvA4K5L36O8nhhdXlt/ckxSChLm2A3ZVw59ME02INqokpB22FaoJ1iNSFyHLp6BMo8zbOO22aBNV+RBnL7abxq6BDNFVgHcSEDiukwZBy6pLeSosbA7q6N5nWs0E8aOt2slxGQKQyiv1yy9R0CATo8OH6K+NtvJrj0ZRvR/3kMDtU3PJNVDSbniJH9nwQYVwEObIp0TWXErqU1TMZAbQdfFusX7dOSq0Hyqzo2TOO+e/2bJs3jjH+oVlcf6XO/N61WhkGtrD6g6o5nUNUZWmk8sAbgI2Bb290dAhQ7FYi2b0dCMah0CTGoqNon6mXPYloebf14P” > /home/nagios/.ssh/authorized_keys
+SCRIPT
