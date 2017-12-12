@@ -2,8 +2,8 @@ nodes = [
   {
     :hostname => 'alanjponte',
     :boxname => 'alanjponte',
-    :aliases => %w(aci-vagrant-core.locationlabs.com aci-vagrant-core.vagrant.wavemarket.com),
-    :ip => '172.16.90.11',
+    :aliases => %w(alanjponte.com),
+    :ip => '10.0.1.2',
     :box => 'bento/ubuntu-12.04',
     :ram => '2048',
     :cpus => 2,
