@@ -1,0 +1,6 @@
+---
+# Verify that Ansible can connect to all hosts in environment
+- name: gather facts for all hosts
+  hosts: all
+  gather_facts: true  # force fact gathering even if cached
+
